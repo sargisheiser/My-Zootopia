@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <meta charset="utf-8" />
+<head>
+   <meta charset="utf-8"/>
    <title>My Animal Repository</title>
-   <style>
-     :root {
-       &#45;&#45;gray-darker: #444444;
-       &#45;&#45;gray-dark: #696969;
-       &#45;&#45;gray: #999999;
-       &#45;&#45;gray-light: #cccccc;
-       &#45;&#45;gray-lighter: #ececec;
-       &#45;&#45;gray-lightest: #f2f2f2;
-     }
+   <style> :root {
+       --gray-darker: #444444;
+       --gray-dark: #696969;
+       --gray: #999999;
+       --gray-light: #cccccc;
+       --gray-lighter: #ececec;
+       --gray-lightest: #f2f2f2;
+   }
 
 
-     html { background-color: #ffe9e9; }
+   html {
+       background-color: #ffe9e9;
+   }
 
 
-     h1 {
+   h1 {
        text-align: center;
        font-size: 40pt;
        font-weight: normal;
-     }
+   }
 
 
-     body {
-       font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+   body {
+       font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
        font-style: normal;
        font-weight: 400;
        letter-spacing: 0;
@@ -36,186 +37,63 @@
        -moz-font-feature-settings: "liga" on;
        width: 900px;
        margin: auto;
-     }
+   }
 
 
-     .cards {
+   .cards {
        list-style: none;
        margin: 0;
        padding: 0;
-       white-space: pre-line;
-     }
+   }
 
 
-     .cards__item {
+   .cards__item {
        background-color: #ffffff;
        border-radius: 0.25rem;
-       box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+       box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
        overflow: hidden;
        padding: 1rem;
        margin: 50px;
-     }
+   }
 
 
-     .card__title {
-       color: var(&#45;&#45;gray-dark);
+   .card__title {
+       color: var(--gray-dark);
        font-size: 1.25rem;
        font-weight: 300;
        letter-spacing: 2px;
        text-transform: uppercase;
-     }
+   }
 
 
-     .card__text {
+   .card__text {
        flex: 1 1 auto;
        font-size: 0.95rem;
        line-height: 2;
        margin-bottom: 1.25rem;
-     }
+   }
 
 
-     .card__fields {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      }
+   .card__fields {
+       list-style: none;
+       margin: 0;
+       padding: 0;
+   }
 
 
-     .card__field {
-      line-height: 1.6;
-      margin: 0.15rem 0;
-      }
+   .card__field {
+       line-height: 1.6;
+       margin: 0.15rem 0;
+   }
 
 
-     .card__field strong {
-     display: inline-block;
-     min-width: 110px;
-     font-weight: 600;
-     }
-   </style>
- </head>
- <body>
-   <h1>My Animal Repository</h1>
-   <ul class="cards">
-<li class="cards__item">
-<div class="card__title">Arctic Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Carnivore</li>
-<li class="card__field"><strong>Location:</strong> Eurasia</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 7 - 10 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Cross Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Carnivore</li>
-<li class="card__field"><strong>Location:</strong> North-America</li>
-<li class="card__field"><strong>Type:</strong> mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 10 to 15 years in captivity, seven years in the wild</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Darwin’s fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> South-America</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> Seven years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Fennec Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> Africa</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 10 - 14 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Carnivore</li>
-<li class="card__field"><strong>Location:</strong> Africa</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 3 - 11 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Fox Squirrel</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> Central-America</li>
-<li class="card__field"><strong>Type:</strong> rodent</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 6-12.6 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Gray Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> Central-America</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 6-12 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Kit Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> Central-America</li>
-<li class="card__field"><strong>Type:</strong> mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> seven years in the wild. 12 years in captivity</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Marble Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Omnivore</li>
-<li class="card__field"><strong>Location:</strong> North-America</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> Up to 15 years</li>
-</ul>
-</div>
-</li>
-<li class="cards__item">
-<div class="card__title">Tibetan Fox</div>
-<div class="card__text">
-<ul class="card__fields">
-<li class="card__field"><strong>Diet:</strong> Carnivore</li>
-<li class="card__field"><strong>Location:</strong> Asia</li>
-<li class="card__field"><strong>Type:</strong> Mammal</li>
-<li class="card__field"><strong>Skin:</strong> Fur</li>
-<li class="card__field"><strong>Lifespan:</strong> 8-10 years</li>
-</ul>
-</div>
-</li>
-</ul>
- </body>
+   .card__field strong {
+       display: inline-block;
+       min-width: 110px;
+       font-weight: 600;
+   } </style>
+</head>
+<body><h1>My Animal Repository</h1>
+<ul class="cards"> REPLACE_ANIMALS_INFO</ul>
+</body>
 </html>
