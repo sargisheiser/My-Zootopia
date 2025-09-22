@@ -59,6 +59,8 @@ def get_skin_type(animal: Dict[str, Any]) -> Optional[str]:
    return (animal.get("characteristics") or {}).get("skin_type")
 
 
+
+
 def unique_skin_types(data: Iterable[Dict[str, Any]]) -> List[str]:
    """Return a sorted list of unique skin types from animal data."""
 
@@ -66,6 +68,7 @@ def unique_skin_types(data: Iterable[Dict[str, Any]]) -> List[str]:
    vals = {(get_skin_type(a) or "").strip() for a in data}
    vals = {v for v in vals if v}
    return sorted(vals, key=str.casefold)
+
 
 
 
@@ -206,13 +209,24 @@ def main() -> None:
 
    query = input("Enter a name of an animal: ").strip()
    animals = fetch_animals(query)
+
+
    options = unique_skin_types(animals)
    selection = prompt_skin_type(options)
    filtered = filter_by_skin_type(animals, selection)
-   print(f"\nSelected: {selection} → rendering {len(filtered)} of {len(animals)} animals.")
-   items_html = build_animals_html(filtered)
+
+
    template = read_template(TEMPLATE_FILE)
-   final_html = inject_into_ul(template, items_html)
+
+
+   if not animals:
+       message = f'<h2>The animal "{escape(query)}" doesn\'t exist.</h2>'
+       final_html = inject_into_ul(template, message)
+   else:
+       items_html = build_animals_html(animals)
+       final_html = inject_into_ul(template, items_html)
+
+
    write_template(OUTPUT_FILE, final_html)
 
 
