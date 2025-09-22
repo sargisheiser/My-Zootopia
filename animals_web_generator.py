@@ -46,12 +46,10 @@ def write_template(path: Path, content: str) -> None:
 
    try:
        path.write_text(content, encoding="utf-8")
-       print(f"Successfully wrote output to {path}")
+       print(f"Website was successfully generated to the file {path.name}.")
    except OSError as exc:
        print(f"Failed to write {path}: {exc}")
        raise
-
-
 
 
 def get_skin_type(animal: Dict[str, Any]) -> Optional[str]:
@@ -61,8 +59,6 @@ def get_skin_type(animal: Dict[str, Any]) -> Optional[str]:
    return (animal.get("characteristics") or {}).get("skin_type")
 
 
-
-
 def unique_skin_types(data: Iterable[Dict[str, Any]]) -> List[str]:
    """Return a sorted list of unique skin types from animal data."""
 
@@ -70,7 +66,6 @@ def unique_skin_types(data: Iterable[Dict[str, Any]]) -> List[str]:
    vals = {(get_skin_type(a) or "").strip() for a in data}
    vals = {v for v in vals if v}
    return sorted(vals, key=str.casefold)
-
 
 
 
@@ -116,8 +111,6 @@ def prompt_skin_type(options: List[str]) -> str:
    return ALL
 
 
-
-
 def filter_by_skin_type(data: Iterable[Dict[str, Any]], selection: str) -> List[Dict[str, Any]]:
    """Filter animals by the selected skin type."""
 
@@ -131,15 +124,13 @@ def filter_by_skin_type(data: Iterable[Dict[str, Any]], selection: str) -> List[
    return [a for a in data if (get_skin_type(a) or "").strip().lower() == selection.strip().lower()]
 
 
-
-
 def serialize_animal(animal: Dict[str, Any]) -> str:
    """ Convert a single animal record into an HTML <li> block.
    Args: animal: Dictionary with fields such as 'name', 'characteristics', 'locations'.
    Returns: A string of HTML representing the animal in card format. """
 
 
-   name = animal.get("name")
+   name = escape(animal.get("name", "Unknown"))
    c = animal.get("characteristics") or {}
    diet = c.get("diet")
    a_type = c.get("type")
@@ -186,15 +177,11 @@ def serialize_animal(animal: Dict[str, Any]) -> str:
    )
 
 
-
-
 def build_animals_html(data: List[Dict[str, Any]]) -> str:
    """Build HTML for all animals as a joined string of <li> cards."""
 
 
    return "\n".join(serialize_animal(a) for a in data)
-
-
 
 
 def inject_into_ul(html: str, inner_html: str) -> str:
@@ -214,12 +201,11 @@ def inject_into_ul(html: str, inner_html: str) -> str:
    return UL_PATTERN.sub(r"\1\n" + inner_html + r"\n\3", html)
 
 
-
-
 def main() -> None:
 
 
-   animals = fetch_animals('Fox')
+   query = input("Enter a name of an animal: ").strip()
+   animals = fetch_animals(query)
    options = unique_skin_types(animals)
    selection = prompt_skin_type(options)
    filtered = filter_by_skin_type(animals, selection)
