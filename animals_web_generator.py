@@ -1,39 +1,33 @@
 import json
 import re
+import requests
 from html import escape
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 BASE_DIR: Path = Path(__file__).resolve().parent
-JSON_FILE: Path = BASE_DIR / "animals_data.json"
 TEMPLATE_FILE: Path = BASE_DIR / "animals_template.html"
 OUTPUT_FILE: Path = BASE_DIR / "animals.html"
+
+
 UL_PATTERN = re.compile(r'(?is)(<ul\s+class="cards"[^>]*>)(.*?)(</ul>)')
 ALL = "ALL"
 UNKNOWN = "UNKNOWN"
 
 
+API_KEY = "IPZbH2jrafSIj5Sohr6mhw==jYhIGYAKhagOvwCP"
+API_URL = "https://api.api-ninjas.com/v1/animals"
 
 
-def load_data(file_path: Path) -> List[Dict[str, Any]]:
-   """ Load and parse animal data from a JSON file.
-   Args: file_path: Path to the JSON file.
-   Returns: A list of dictionaries containing animal data.
-   Raises: ValueError: If the file is empty, not valid JSON, or looks like HTML. """
+def fetch_animals(param: str) -> List[Dict[str, Any]]:
+   """ Fetches animal data from the API."""
 
 
-   text = file_path.read_text(encoding="utf-8")
-   if not text.strip():
-       raise ValueError(f"{file_path.name} is empty.")
-   if text.lstrip().startswith("<"):
-       raise ValueError(f"{file_path.name} looks like HTML, not JSON.")
-   try:
-       return json.loads(text)
-   except json.JSONDecodeError as exc:
-       raise ValueError(f"Invalid JSON in {file_path.name}: {exc}") from exc
-
-
+   headers = {"X-Api-Key": API_KEY}
+   response = requests.get(API_URL, params = {"name": param}, headers=headers)
+   response.raise_for_status()
+   return response.json()
 
 
 def read_template(path: Path) -> str:
@@ -225,7 +219,7 @@ def inject_into_ul(html: str, inner_html: str) -> str:
 def main() -> None:
 
 
-   animals = load_data(JSON_FILE)
+   animals = fetch_animals('Fox')
    options = unique_skin_types(animals)
    selection = prompt_skin_type(options)
    filtered = filter_by_skin_type(animals, selection)
