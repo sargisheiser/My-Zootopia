@@ -1,7 +1,6 @@
-import json
 import re
-import requests
 from html import escape
+import data_fetcher
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -16,27 +15,11 @@ ALL = "ALL"
 UNKNOWN = "UNKNOWN"
 
 
-API_KEY = "IPZbH2jrafSIj5Sohr6mhw==jYhIGYAKhagOvwCP"
-API_URL = "https://api.api-ninjas.com/v1/animals"
-
-
-def fetch_animals(param: str) -> List[Dict[str, Any]]:
-   """ Fetches animal data from the API."""
-
-
-   headers = {"X-Api-Key": API_KEY}
-   response = requests.get(API_URL, params = {"name": param}, headers=headers)
-   response.raise_for_status()
-   return response.json()
-
-
 def read_template(path: Path) -> str:
    """Read the HTML template as a string."""
 
 
    return path.read_text(encoding="utf-8")
-
-
 
 
 def write_template(path: Path, content: str) -> None:
@@ -50,6 +33,8 @@ def write_template(path: Path, content: str) -> None:
    except OSError as exc:
        print(f"Failed to write {path}: {exc}")
        raise
+
+
 
 
 def get_skin_type(animal: Dict[str, Any]) -> Optional[str]:
@@ -208,7 +193,7 @@ def main() -> None:
 
 
    query = input("Enter a name of an animal: ").strip()
-   animals = fetch_animals(query)
+   animals = data_fetcher.fetch_data(query)
 
 
    options = unique_skin_types(animals)
@@ -223,7 +208,7 @@ def main() -> None:
        message = f'<h2>The animal "{escape(query)}" doesn\'t exist.</h2>'
        final_html = inject_into_ul(template, message)
    else:
-       items_html = build_animals_html(animals)
+       items_html = build_animals_html(filtered)
        final_html = inject_into_ul(template, items_html)
 
 
@@ -232,3 +217,6 @@ def main() -> None:
 
 if __name__ == "__main__":
    main()
+
+
+
